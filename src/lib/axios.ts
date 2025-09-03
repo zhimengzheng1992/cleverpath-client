@@ -1,43 +1,23 @@
-// src/lib/axios.ts
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios from "axios";
+import { createTypedApi } from "./typedApi"; // 这里是你刚才写的那个文件
 
-const api = axios.create({
+// 先创建原始 axios 实例
+const axiosInstance = axios.create({
   baseURL: "http://localhost:8080",
-  timeout: 10000,
-  headers: { "Content-Type": "application/json" },
+  timeout: 5000,
 });
 
-// 请求拦截器
-api.interceptors.request.use((config) => {
-  if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+// 请求拦截器，自动加 token
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token"); // 或从 cookie / context 里取
+  if (token) {
+    config.headers = config.headers ?? {};
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
 
-// 响应拦截器
-api.interceptors.response.use(
-  (response) => {
-    const res = response.data;
-    if (res.code !== 0 && res.code !== 200) {
-      return Promise.reject(res.msg || "Unknown error");
-    }
-    return res.data; // 👈 直接返回 data
-  },
-  (error) => Promise.reject(error.response?.data?.msg || error.message)
-);
+// 包装成带有类型的 api
+const api = createTypedApi(axiosInstance);
 
-// ✅ 用函数重载声明 post/get 的返回值类型
-interface TypedApi extends AxiosInstance {
-  post<T = any>(
-    url: string,
-    data?: any,
-    config?: AxiosRequestConfig
-  ): Promise<T>;
-  get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T>;
-}
-
-export default api as TypedApi;
+export default api;

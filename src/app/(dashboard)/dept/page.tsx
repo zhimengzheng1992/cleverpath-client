@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import DeptTable from "@/components/ui/DeptTable";
 import api from "@/lib/axios";
-import AppDialog from "@/components/ui/Dialog"; // ✅ 引入统一Dialog
+import AppDialog from "@/components/ui/Dialog1"; // ✅ 引入统一Dialog
 import toast from "react-hot-toast";
 
 interface Department {
@@ -22,7 +22,7 @@ export default function DeptPage() {
   const fetchData = async () => {
     try {
       const res = await api.get<Department[]>("/depts"); // ✅ GET /depts
-      setData(res);
+      setData(res.data);
     } catch (err: any) {
       toast.error("Failed to fetch departments: " + (err.message || err));
     }

@@ -26,6 +26,7 @@ export default function DashboardLayout({
           <Toaster
             position="top-center"
             containerClassName="!absolute !left-1/2 !transform !-translate-x-1/2 !top-4"
+            toastOptions={{ className: "z-[9999]" }} // 防止被遮
           />
           {children}
         </main>
