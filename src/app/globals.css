@@ -126,4 +126,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    scrollbar-gutter: stable; /* 防止纵向滚动条出现/消失引起抖动 */
+    /* color-scheme: light dark; 原生滚动条/表单控件跟随暗色 */
+    /* 兜底（可选）：兼容不支持 scrollbar-gutter 的环境 */
+    /* overflow-y: scroll; */
+  }
 }

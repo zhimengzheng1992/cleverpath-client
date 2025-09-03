@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import DeptTable from "@/components/ui/DeptTable";
 import api from "@/lib/axios";
 import AppDialog from "@/components/ui/Dialog"; // ✅ 引入统一Dialog

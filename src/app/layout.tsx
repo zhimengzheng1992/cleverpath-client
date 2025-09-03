@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 // import { Toaster } from "react-hot-toast";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "Clever Path Client",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <Providers>{children}</Providers>
         {/* <Toaster position="top-center" /> */}
       </body>
     </html>

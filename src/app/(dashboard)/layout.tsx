@@ -12,14 +12,16 @@ export default function DashboardLayout({
   return (
     <div className="h-screen flex flex-col">
       {/* 顶部 Header */}
-      <Header />
+      <div className="shrink-0">
+        <Header />
+      </div>
 
-      <div className="flex flex-1">
+      <div className="flex flex-1 min-h-0">
         {/* 左侧菜单 */}
         <Sidebar />
 
         {/* 右侧主内容区 */}
-        <main className="flex-1 p-6 overflow-y-auto relative">
+        <main className="flex-1 p-6 overflow-y-auto relative min-w-0 min-h-0">
           {/* ✅ Toast 只渲染在 main 区域 */}
           <Toaster
             position="top-center"

@@ -1,15 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function DateRangeInput() {
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
-    null,
-    null,
-  ]);
-  const [startDate, endDate] = dateRange;
+export interface DateRangeInputProps {
+  value: [Date | null, Date | null];
+  onChange: (range: [Date | null, Date | null]) => void;
+}
+
+export default function DateRangeInput({
+  value,
+  onChange,
+}: DateRangeInputProps) {
+  const [startDate, endDate] = value;
 
   return (
     <div className="flex items-center space-x-2">
@@ -18,7 +21,7 @@ export default function DateRangeInput() {
         {/* 开始日期 */}
         <DatePicker
           selected={startDate}
-          onChange={(date) => setDateRange([date, endDate])}
+          onChange={(date) => onChange([date, endDate])}
           selectsStart
           startDate={startDate}
           endDate={endDate}
@@ -32,7 +35,7 @@ export default function DateRangeInput() {
         {/* 结束日期 */}
         <DatePicker
           selected={endDate}
-          onChange={(date) => setDateRange([startDate, date])}
+          onChange={(date) => onChange([startDate, date])}
           selectsEnd
           startDate={startDate}
           endDate={endDate}
