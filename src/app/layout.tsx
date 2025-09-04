@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 // import { Toaster } from "react-hot-toast";
-import Providers from "./providers";
-import { Toaster } from "react-hot-toast";
+import Providers from "../components/providers";
 
 export const metadata: Metadata = {
   title: "Clever Path Client",
@@ -18,11 +17,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>{children}</Providers>
-        <Toaster
-          position="top-center"
-          gutter={8}
-          toastOptions={{ duration: 2500 }}
-        />
       </body>
     </html>
   );

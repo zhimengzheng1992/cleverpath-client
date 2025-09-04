@@ -13,13 +13,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
-import {
-  getEmployeeById,
-  updateEmployee,
-  EmpUpdate,
-  EmpDetail,
-} from "@/services/emps";
-import type { ApiResponse } from "@/lib/typedApi";
+import { getEmployeeById, updateEmployee } from "@/services/emps";
+import type { ApiResponse } from "@/types/api";
+import type { EmpUpdate, EmpDetail } from "@/types/emp";
 
 function isYMD(s?: string | null) {
   return !!s && /^\d{4}-\d{2}-\d{2}$/.test(s);
