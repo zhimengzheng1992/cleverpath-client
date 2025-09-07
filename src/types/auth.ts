@@ -15,3 +15,10 @@ export interface LoginResponse {
   msg: string; // 后端返回的提示信息
   data: LoginData;
 }
+
+export type LoginUser = {
+  id: number;
+  username: string;
+  name?: string;
+  token: string;
+};

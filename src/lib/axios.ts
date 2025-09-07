@@ -14,6 +14,7 @@ function getAccessToken(): string | null {
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8080",
   timeout: 10000,
+  withCredentials: true,
   // 若用 Cookie 传递会话，打开下面一行并确保后端设置 CORS withCredentials
   // withCredentials: true,
 });
@@ -36,7 +37,13 @@ api.interceptors.response.use(
   (res) => res.data,
   async (error) => {
     // 这里可以按需处理 401/刷新 token/全局错误提示等
-    // if (error?.response?.status === 401) { ...刷新逻辑... }
+    if (error.response?.status === 401) {
+      // 清理缓存、状态
+      if (typeof window !== "undefined") {
+        // 避免在 SSR 环境调用
+        window.location.href = "/login"; // 或用 next/navigation 的 router.push
+      }
+    }
     return Promise.reject(error);
   }
 );
