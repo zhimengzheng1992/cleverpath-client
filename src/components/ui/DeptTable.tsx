@@ -133,7 +133,8 @@ export default function DeptTable({
         params: { id: deletingDept.id },
       });
       // 假设 resp 是 { code, msg, data }（与你 axios 拦截器匹配）
-      if (resp?.code !== 200) throw new Error(resp.message || "Delete failed");
+      if (resp.data?.code !== 200)
+        throw new Error(resp.data?.msg || "Delete failed");
       setDeletingDept(null);
       onRefresh();
       toast.success("Department deleted successfully");
@@ -149,7 +150,8 @@ export default function DeptTable({
         id: editingDept.id,
         name: editingDept.name,
       });
-      if (resp?.code !== 200) throw new Error(resp.message || "Update failed");
+      if (resp.data?.code !== 200)
+        throw new Error(resp.data?.msg || "Update failed");
       setEditingDept(null);
       onRefresh();
       toast.success("Department updated successfully");
