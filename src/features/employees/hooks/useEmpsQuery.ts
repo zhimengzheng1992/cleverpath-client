@@ -6,9 +6,10 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { qk } from "@/lib/queryKeys";
-import { getEmployees, EmpsQuery } from "@/services/emps";
+import { getEmployees } from "@/services/emps";
+import type { EmpsQuery } from "@/types/emp.ts";
 import type { EmpRow } from "@/types/emp";
-import type { ApiResponse } from "@/lib/typedApi"; // 你定义 ApiResponse 的地方
+import type { ApiResponse } from "@/types/api";
 
 type EmpsPayload = { rows: EmpRow[]; total: number };
 
